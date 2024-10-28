@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Keys</title>
-</head>
-<body>
-    <button onclick="sendCommand('x', 'down')">X Down</button>
-    <button onclick="sendCommand('x', 'up')">X Up</button>
-    <button onclick="sendCommand('d', 'down')">D Down</button>
-    <button onclick="sendCommand('d', 'up')">D Up</button>
-    <button onclick="sendCommand('a', 'down')">A Down</button>
-    <button onclick="sendCommand('a', 'up')">A Up</button>
-    <button onclick="sendCommand('f', 'down')">F Down</button>
-    <button onclick="sendCommand('f', 'up')">F Up</button>
-
+    <title>Boutons de requête</title>
     <script>
-        function sendCommand(key, action) {
-            const url = `https://8ab1-2a04-cec0-c00b-8945-bce8-4be7-cd49-25e3.ngrok-free.app/${key}/${action}`;  // Remplace par ton URL ngrok
+        function sendRequest(endpoint) {
+            const url = `https://8ab1-2a04-cec0-c00b-8945-bce8-4be7-cd49-25e3.ngrok-free.app/${endpoint}`;
             fetch(url)
-                .then(response => response.text())
-                .then(data => console.log(`Sent ${action} for ${key}`))
-                .catch(error => console.error('Error:', error));
+                .then(response => console.log(`Requête envoyée à ${url} : `, response.status))
+                .catch(error => console.error('Erreur lors de l\'envoi de la requête :', error));
         }
     </script>
+</head>
+<body>
+    <button onclick="sendRequest('x/down')">X Down</button>
+    <button onclick="sendRequest('x/up')">X Up</button>
+    <button onclick="sendRequest('d/down')">D Down</button>
+    <button onclick="sendRequest('d/up')">D Up</button>
+    <button onclick="sendRequest('a/down')">A Down</button>
+    <button onclick="sendRequest('a/up')">A Up</button>
+    <button onclick="sendRequest('f/down')">F Down</button>
+    <button onclick="sendRequest('f/up')">F Up</button>
 </body>
 </html>
+
