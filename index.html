@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutons de requête</title>
-    <script>
-        function sendRequest(endpoint) {
-            const url = `https://8406-2a04-cec0-c00b-8945-ac0a-6738-5c0-2ab4.ngrok-free.app/${endpoint}`;
-            fetch(url)
-                .then(response => console.log(`Requête envoyée à ${url} : `, response.status))
-                .catch(error => console.error('Erreur lors de l\'envoi de la requête :', error));
-        }
-    </script>
+    <title>Control Keys</title>
 </head>
 <body>
-    <button onclick="sendRequest('x/down')">X Down</button>
-    <button onclick="sendRequest('x/up')">X Up</button>
-    <button onclick="sendRequest('d/down')">D Down</button>
-    <button onclick="sendRequest('d/up')">D Up</button>
-    <button onclick="sendRequest('a/down')">A Down</button>
-    <button onclick="sendRequest('a/up')">A Up</button>
-    <button onclick="sendRequest('f/down')">F Down</button>
-    <button onclick="sendRequest('f/up')">F Up</button>
+    <!-- Boutons pour envoyer les commandes -->
+    <button onclick="sendCommand('x', 'down')">X Down</button>
+    <button onclick="sendCommand('x', 'up')">X Up</button>
+    <button onclick="sendCommand('d', 'down')">D Down</button>
+    <button onclick="sendCommand('d', 'up')">D Up</button>
+    <button onclick="sendCommand('a', 'down')">A Down</button>
+    <button onclick="sendCommand('a', 'up')">A Up</button>
+    <button onclick="sendCommand('f', 'down')">F Down</button>
+    <button onclick="sendCommand('f', 'up')">F Up</button>
+
+    <!-- Code JavaScript intégré pour envoyer les commandes -->
+    <script>
+        function sendCommand(key, action) {
+            console.log(`Button clicked: ${key} ${action}`);  // Vérifie que cela s'affiche dans la console
+            const url = `https://0e2e-2a04-cec0-c00b-8945-ac0a-6738-5c0-2ab4.ngrok-free.app/${key}/${action}`;  // Remplace par ton URL ngrok
+            fetch(url, {
+                method: 'GET',
+                mode: 'cors'
+            })
+            .then(response => response.text())
+            .then(data => console.log(`Sent ${action} for ${key}`))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
 </html>
-
